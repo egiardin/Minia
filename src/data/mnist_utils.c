@@ -40,7 +40,7 @@ void print_img(unsigned char *image1)
     int i;
 
     i = 0;
-    while(i < 784)
+    while(i < MNIST_SIZE_INPUT)
     {
         if(i % 28 == 0 && i != 0)
             printf("\n");
@@ -58,7 +58,7 @@ void print_img_unitaire(mat image1, FILE *sortie)
     int i;
 
     i = 0;
-    while(i < 784)
+    while(i < MNIST_SIZE_INPUT)
     {
         if(i % 28 == 0 && i != 0)
             fprintf(sortie, "\n");
@@ -93,8 +93,8 @@ void normalize_img(t_data *img, mat normalized_output, int img_index) //img_inde
     unsigned char pixel;
 
     i = 0;
-    start_position = img_index * 784;
-    while(i < 784)
+    start_position = img_index * MNIST_SIZE_INPUT;
+    while(i < MNIST_SIZE_INPUT)
     {
         pixel = img->all_img[start_position + i];
         normalized_output.mat[0][i] = (float)pixel / 255.0;

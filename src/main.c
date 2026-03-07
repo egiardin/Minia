@@ -1,5 +1,8 @@
 #include "minia.h"
 
+const int MNIST_SIZE_PIXEL = 28;
+const int MNIST_SIZE_INPUT = (MNIST_SIZE_PIXEL * MNIST_SIZE_PIXEL);
+
 int main()
 {
     t_layers *layers;
@@ -12,7 +15,7 @@ int main()
     if(!layers || !data)
         return(-1);
     initialize_data(data);
-    init_reseau(layers, 784, 30, 10);
+    init_reseau(layers, MNIST_SIZE_INPUT, 30, 10);
 
     train(layers, data, 10, 0.0001, nbr_layers);
     return(0);

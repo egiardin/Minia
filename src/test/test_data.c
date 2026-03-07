@@ -15,11 +15,11 @@ void test_img(t_data *data)
     printf("%zu", data->total_alloc);
     printf(" octets ou %.2zu Mo", data->total_alloc/1000000);
     printf("\n----- Image 1 -----\n");
-    print_img(data->all_img + (1 * 784));
+    print_img(data->all_img + (1 * MNIST_SIZE_INPUT));
     printf("\n----- Image 6 978 -----\n");
-    print_img(data->all_img + (6978 * 784));
+    print_img(data->all_img + (6978 * MNIST_SIZE_INPUT));
     printf("\n----- Image 17 012 -----\n");
-    print_img(data->all_img + (17012 * 784));
+    print_img(data->all_img + (17012 * MNIST_SIZE_INPUT));
 }
 
 

@@ -4,7 +4,7 @@ void init_reseau(t_layers *layers, int size_input, int size_middle_layer, int si
 {
 
     /*----  définition des sizes du modèle. ----*/
-    layers[0].size = size_input; //784             input =  (1, 784) * W1 = (784, 30) * W2 = (30, 10)
+    layers[0].size = size_input; //MNIST_SIZE_INPUT             input =  (1, 784) * W1 = (784, 30) * W2 = (30, 10)
     layers[1].size = size_middle_layer; //30
     layers[2].size = size_expected_output; //10
 

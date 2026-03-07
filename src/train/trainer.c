@@ -18,14 +18,14 @@ void train(t_layers *layers, t_data *mnist_data, int epochs, float learning_rate
     
     path = "./loss.txt";
 
-    input = init_matrice_zero(1, 784);
+    input = init_matrice_zero(1, MNIST_SIZE_INPUT);
     expected_output = init_matrice_zero(1, 10);
     file = fopen(path, "w");
     if(file == NULL)
     {
         perror("Erreur d'ouverture");
         return;
-    }
+   }
     loss = 1;
     i = 0;
     while(i < epochs)
@@ -91,7 +91,7 @@ void train(t_layers *layers, t_data *mnist_data, int epochs, float learning_rate
     
 //     path = "/Users/enzo.giardina/Desktop/Side project/Minia/loss.txt";
 
-//     input = init_matrice_zero(1, 784);
+//     input = init_matrice_zero(1, MNIST_SIZE_INPUT);
 //     expected_output = init_matrice_zero(1, 10);
 //     file = fopen(path, "w");
 //     if(file == NULL)
