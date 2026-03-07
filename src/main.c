@@ -7,8 +7,8 @@ int main()
     int nbr_layers;
 
     nbr_layers = 3;
-    layers = malloc(nbr_layers * sizeof(t_layers));
-    data = malloc(sizeof(t_data));
+    layers = (t_layers *)malloc(nbr_layers * sizeof(t_layers));
+    data = (t_data *)malloc(sizeof(t_data));
     if(!layers || !data)
         return(-1);
     initialize_data(data);
