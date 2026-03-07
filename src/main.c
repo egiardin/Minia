@@ -11,8 +11,8 @@ int main()
 
 	setvbuf(stdout, NULL, _IONBF, 0);
     nbr_layers = 3;
-    layers = (t_layers *)malloc(nbr_layers * sizeof(t_layers));
-    data = (t_data *)malloc(sizeof(t_data));
+    layers = (t_layers *)calloc(nbr_layers, sizeof(t_layers));
+    data = (t_data *)calloc(1, sizeof(t_data));
     if (!layers || !data)
         return(-1);
     initialize_data(data);
