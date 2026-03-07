@@ -11,7 +11,8 @@
  #include "stdint.h"
  #include "struct.h"
 
- #define PI 3.14159265359
+ extern const int MNIST_SIZE_PIXEL;
+ extern const int MNIST_SIZE_INPUT;
 
 /*====================================== NETWORK(Start) ====================================*/
 
