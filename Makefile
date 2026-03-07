@@ -23,7 +23,7 @@ SRCS =	src/data/mnist_loader.c \
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 CC ?= clang
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -O3
 CPPFLAGS = $(addprefix -I, $(INC_DIR)) -MMD
 LDLIBS = -lm
 
