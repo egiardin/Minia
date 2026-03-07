@@ -3,6 +3,7 @@ NAME = minia
 SRC_DIR = src
 OBJ_DIR = obj
 INC_DIR = include
+METRICS = metrics
 
 SRCS = $(shell find $(SRC_DIR) -name '*.c')
 
@@ -20,7 +21,7 @@ RESET = \033[0m
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@echo "$(YELLOW)🔧 Édition des liens...$(RESET)"
+	@echo "$(YELLOW)Édition des liens...$(RESET)"
 	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 	@echo "$(GREEN)Compilation terminée !$(RESET)"
 
@@ -29,9 +30,12 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@echo "$(BLUE) Compilation de $<...$(RESET)"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
+	@mkdir -p $(METRICS)
+
 clean:
 	@echo "$(RED) Suppression des fichiers objets...$(RESET)"
 	@rm -rf $(OBJ_DIR)
+	@rm -rf $(METRICS)
 
 fclean: clean
 	@echo "$(RED) Suppression de l'exécutable...$(RESET)"
