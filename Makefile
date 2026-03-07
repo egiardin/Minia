@@ -4,7 +4,21 @@ SRC_DIR = src
 OBJ_DIR = obj
 INC_DIR = include
 
-SRCS = $(shell find $(SRC_DIR) -name '*.c')
+SRCS =	src/data/mnist_loader.c \
+		src/data/mnist_utils.c \
+		src/network/activ_utils.c \
+		src/network/init_reseau.c \
+		src/network/mat_utils.c \
+		src/network/math_utils.c \
+		src/network/propagation.c \
+		src/network/reseau_utils.c \
+		src/train/train_utils.c \
+		src/train/trainer.c \
+		src/test/test_data.c \
+		src/test/test_network.c \
+		src/test/test_reseau.c \
+		src/test/test_train.c \
+		src/main.c
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
