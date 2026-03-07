@@ -10,12 +10,12 @@ mat init_matrice_he(int line, int column)
     j = 0;
     if (line <= 0 || column <= 0)
     {
-        printf("La dimension de la colonne ou de la ligne est 0 => Impossible\n");
+        ERR_LOG("La dimension de la colonne ou de la ligne est 0 => Impossible");
         exit(-1);
     }
     mat.line = line;
     mat.column = column;
-    mat.mat = calloc(line, sizeof(float *));
+    mat.mat = (float **)calloc(line, sizeof(float *));
     if (!mat.mat)
     {
         mat.line = 0;
@@ -24,7 +24,7 @@ mat init_matrice_he(int line, int column)
     }
     while (i < line)
     {
-        mat.mat[i] = calloc(column, sizeof(float));
+        mat.mat[i] = (float *)calloc(column, sizeof(float));
         if (!mat.mat[i])
         {
             free_partial_mat(mat, i);
@@ -60,7 +60,7 @@ mat init_matrice_random(int line, int column)
     nbr = 1;
     mat.line = line;
     mat.column = column;
-    mat.mat = calloc(line, sizeof(float *));
+    mat.mat = (float **)calloc(line, sizeof(float *));
     if (!mat.mat)
     {
         mat.line = 0;
@@ -69,7 +69,7 @@ mat init_matrice_random(int line, int column)
     }
     while (i < line)
     {
-        mat.mat[i] = calloc(column, sizeof(float));
+        mat.mat[i] = (float *)calloc(column, sizeof(float));
         if (!mat.mat[i])
         {
             free_partial_mat(mat, i);
@@ -99,12 +99,12 @@ mat init_matrice_zero(int line, int column)
     j = 0;
     if (line <= 0 || column <= 0)
     {
-        fprintf(stderr, "La dimension de la colonne ou de la ligne est 0 => Impossible\n");
+        ERR_LOG("La dimension de la colonne ou de la ligne est 0 => Impossible\n");
         exit(-1);
     }
     mat.line = line;
     mat.column = column;
-    mat.mat = calloc(line, sizeof(float *));
+    mat.mat = (float **)calloc(line, sizeof(float *));
     if (!mat.mat)
     {
         mat.line = 0;
@@ -113,7 +113,7 @@ mat init_matrice_zero(int line, int column)
     }
     while (i < line)
     {
-        mat.mat[i] = calloc(column, sizeof(float));
+        mat.mat[i] = (float *)calloc(column, sizeof(float));
         if (!mat.mat[i])
         {
             free_partial_mat(mat, i);
@@ -142,12 +142,12 @@ mat init_matrice_zero_biais(int line, int column)
     j = 0;
     if (line <= 0 || column <= 0)
     {
-        fprintf(stderr, "La dimension de la colonne ou de la ligne est 0 => Impossible\n");
+        fprintf(stdout, "La dimension de la colonne ou de la ligne est 0 => Impossible\n");
         exit(-1);
     }
     mat.line = line;
     mat.column = column;
-    mat.mat = calloc(line, sizeof(float *));
+    mat.mat = (float **)calloc(line, sizeof(float *));
     if (!mat.mat)
     {
         mat.line = 0;
@@ -156,7 +156,7 @@ mat init_matrice_zero_biais(int line, int column)
     }
     while (i < line)
     {
-        mat.mat[i] = calloc(column, sizeof(float));
+        mat.mat[i] = (float *)calloc(column, sizeof(float));
         if (!mat.mat[i])
         {
             free_partial_mat(mat, i);
@@ -206,8 +206,8 @@ void fprint_mat(mat mat)
     {
         while (j < mat.column)
         {
-            fprintf(stderr, "mat[%d][%d] = %.5f", i, j, mat.mat[i][j]);
-            fprintf(stderr, "\n");
+            fprintf(stdout, "mat[%d][%d] = %.5f", i, j, mat.mat[i][j]);
+            fprintf(stdout, "\n");
             j++;
         }
         j = 0;
@@ -448,7 +448,7 @@ mat transp_mat_dir(mat mat1) // pas alloc output
 
 void fprint_info_mat(mat mat1, FILE *name)
 {
-    fprintf(stderr, "\nles dimansions de %s : (%d, %d)\n",(char*)name, mat1.line, mat1.column);
+    fprintf(stdout, "\nles dimansions de %s : (%d, %d)\n",(char*)name, mat1.line, mat1.column);
     return;
     
 }
