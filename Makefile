@@ -25,7 +25,7 @@ OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 CC ?= clang
 CFLAGS = -Wall -Wextra -Werror -Wno-unused-result -O3
 CPPFLAGS = $(addprefix -I, $(INC_DIR)) -MMD
-LDLIBS = -lm
+LDFLAGS = -lm
 
 ECHO = printf
 GREEN = \033[1;32m
@@ -38,7 +38,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(ECHO) "$(YELLOW)🔧 Édition des liens...$(RESET)\n"
-	@$(CC) $(CFLAGS) $(CPPFLAGS) $(LDLIBS) $(OBJS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(CPPFLAGS) $(OBJS) -o $(NAME) $(LDFLAGS)
 	@$(ECHO) "$(GREEN)Compilation terminée !$(RESET)\n"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
@@ -66,7 +66,7 @@ clangd:
 	@for FLAG in $(CPPFLAGS); do \
 		printf "    - \"$$FLAG\"\n" >> ./.clangd; \
 	done
-	@for FLAG in $(LDLIBS); do \
+	@for FLAG in $(LDFLAGS); do \
 		printf "    - \"$$FLAG\"\n" >> ./.clangd; \
 	done
 	@for file in $(INC_DIR); do \
