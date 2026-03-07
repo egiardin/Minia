@@ -9,6 +9,7 @@ int main()
     t_data *data;
     int nbr_layers;
 
+	setvbuf(stdout, NULL, _IONBF, 0);
     nbr_layers = 3;
     layers = (t_layers *)malloc(nbr_layers * sizeof(t_layers));
     data = (t_data *)malloc(sizeof(t_data));
