@@ -13,7 +13,7 @@ int *fisher_yates_shuffle(uint32_t size)
     int j;
     int tmp;
 
-    lst = (int *)malloc(sizeof(int) * size);
+    lst = (int *)calloc(sizeof(int), size);
     if (!lst)
         return (NULL);
 

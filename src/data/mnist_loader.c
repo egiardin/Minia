@@ -36,7 +36,7 @@ void initialize_img(t_data *data)
         return;
     }
     data->total_alloc = data->img_count * data->lines * data->columns * sizeof(unsigned char);
-    data->all_img = malloc(data->total_alloc);
+    data->all_img = calloc(1, data->total_alloc);
     if (!data->all_img)
     {
         perror("Erreur d'initialisation de all_img");
@@ -81,7 +81,7 @@ void initialize_labels(t_data *data)
     data->lbl_count = inverser_uint32(data->lbl_count);
 
    
-    data->labels = malloc(data->lbl_count * sizeof(unsigned char));
+    data->labels = calloc(data->lbl_count, sizeof(unsigned char));
     if (!data->labels)
     {
         perror("Erreur d'initialisation de data->labels");
