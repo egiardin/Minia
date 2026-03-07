@@ -22,9 +22,12 @@ SRCS =	src/data/mnist_loader.c \
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-CC = cc
-CFLAGS = -Wall -Wextra -I $(INC_DIR)
+CC ?= clang
+CFLAGS = -Wall -Wextra -Werror
+CPPFLAGS = $(addprefix -I, $(INC_DIR)) -MMD
+LDLIBS = -lm
 
+ECHO = printf
 GREEN = \033[1;32m
 YELLOW = \033[1;33m
 BLUE = \033[1;34m
@@ -34,23 +37,44 @@ RESET = \033[0m
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@echo "$(YELLOW)🔧 Édition des liens...$(RESET)"
-	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
-	@echo "$(GREEN)Compilation terminée !$(RESET)"
+	@$(ECHO) "$(YELLOW)🔧 Édition des liens...$(RESET)\n"
+	@$(CC) $(CFLAGS) $(CPPFLAGS) $(LDLIBS) $(OBJS) -o $(NAME)
+	@$(ECHO) "$(GREEN)Compilation terminée !$(RESET)\n"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
-	@echo "$(BLUE) Compilation de $<...$(RESET)"
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(ECHO) "$(BLUE) Compilation de $<...$(RESET)\n"
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 clean:
-	@echo "$(RED) Suppression des fichiers objets...$(RESET)"
+	@$(ECHO) "$(RED) Suppression des fichiers objets...$(RESET)\n"
 	@rm -rf $(OBJ_DIR)
 
 fclean: clean
-	@echo "$(RED) Suppression de l'exécutable...$(RESET)"
+	@$(ECHO) "$(RED) Suppression de l'exécutable...$(RESET)\n"
 	@rm -f $(NAME)
 
 re: fclean all
 
+clangd:
+	@printf "CompileFlags:\n" > ./.clangd
+	@printf "  Add:\n" >> ./.clangd
+	@printf "    - \"-xc\"\n" >> ./.clangd
+	@for FLAG in $(CFLAGS); do \
+		printf "    - \"$$FLAG\"\n" >> ./.clangd; \
+	done
+	@for FLAG in $(CPPFLAGS); do \
+		printf "    - \"$$FLAG\"\n" >> ./.clangd; \
+	done
+	@for FLAG in $(LDLIBS); do \
+		printf "    - \"$$FLAG\"\n" >> ./.clangd; \
+	done
+	@for file in $(INC_DIR); do \
+		printf "    - \"-I"$(shell pwd)"/"$$file"\"\n" >> .clangd; \
+	done
+	@printf "\n" >> ./.clangd
+	@printf '$(BLUE)Les reglages de clangd sont maintenant disponible dans ./.clangd$(END)\n'
+
 .PHONY: all clean fclean re
+
+-include $(OBJS:.o=.d)
