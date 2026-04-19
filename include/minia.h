@@ -63,7 +63,7 @@
 
  /* ===== init_reseau.c ===== */
 
- void   init_reseau(t_layers *layers, int size_input, int size_expected_output, int size_middle_layer);
+ void init_reseau(t_layers *layers, int size_input, int size_middle_layer, int size_expected_output);
 
  /* ===== propagation.c  ===== */
 
@@ -145,5 +145,13 @@ void  back_propagation(t_layers *layers, mat expected_output, int nbr_layers, fl
  void label_to_vect(mat expect_vect, int label);
 
 /*====================================== TRAIN(End)====================================*/
+
+
+/*====================================== Monitoring(Start)====================================*/
+
+
+
+
+/*====================================== Monitoring(End)====================================*/
 
 #endif
